@@ -1,2 +1,3 @@
 include /home/base/rptcommon/rptcommon.mk
-# TEMPLATE_TEX = template.tex
+# include ../rptcommon/rptcommon.mk
+# TEMPLATE_TEX = ../rptcommon/template.tex

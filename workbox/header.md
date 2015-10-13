@@ -4,6 +4,8 @@ author:
 - name: 某某某
   number: 14284060xx
   affiliation: 14 通信工程 (嵌入式培养)
+  schoolname: 电子信息学院
+course: Linux 操作系统
 date: 2015-2016 学年第一学期
 abstract: |
   这是摘要。主要写一下本汇编册子中有哪些实验报告，都做了写什么。教学检查

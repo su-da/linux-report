@@ -24,30 +24,31 @@ $endif$
   \ifxetex
     \usepackage{mathspec}
     \usepackage{xltxtra,xunicode}
-    \usepackage[UTF8, heading = true, fontset = none]{ctex}
+    \usepackage[UTF8, heading = true, fontset = adobe]{ctex}
     \ctexset {
         chapter = {
             number = \arabic{chapter},
-            format = \Large\bfseries\centering,
+            format = \Large\sffamily\centering,
+            name = {实验},
         },
         section = {
-            format = \large\bfseries,
+            format = \large\sffamily,
         },
         subsection = {
-            format = \bfseries,
-        }
+            format = \sffamily,
+        },
+        abstractname = {\pdfbookmark[0]{摘要}{abstract}摘要}
     }
-    % \CTEXoptions[contentsname={}]
     \setmainfont{Minion Pro}
     % \setmathfont(Greek){Minion Pro}
     \setsansfont{Myriad Pro}
-    % \setmonofont{FreeMono}
-    \setCJKmainfont[BoldFont={FZSongHei-B07S},
+    \setmonofont{Consolas}
+    \setCJKmainfont[BoldFont={SimHei},
                   ItalicFont={FZKaiTi},
                   SlantedFont={FZFangSongTi}]{FZShuSong-Z01}
     \setCJKsansfont[BoldFont={FZDaHei-B02S},
                   ItalicFont={FZLiShu II-S06S},
-                  SlantedFont={FZCuYuan-M03S}]{FZHeiTi}
+                  SlantedFont={FZCuYuan-M03S}]{SimHei}
     \setCJKmonofont[BoldFont={FZZhongDengXian-Z07S},
                   ItalicFont={FZXiYuan-M01S},
                   SlantedFont={FZBaoSong-Z04S}]{FZXiDengXian-Z06S}
@@ -91,6 +92,15 @@ $endif$
   \usepackage[unicode=true]{hyperref}
 \fi
 \usepackage[usenames,dvipsnames]{color}
+$if(print)$
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            pdfstartview={FitH},
+            allcolors=black,
+            pdfborder={0 0 0}}
+$else$
 \hypersetup{breaklinks=true,
             bookmarks=true,
             pdfauthor={$author-meta$},
@@ -101,6 +111,7 @@ $endif$
             urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
             linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
             pdfborder={0 0 0}}
+$endif$
 \urlstyle{same}  % don't use monospace font for urls
 $if(lang)$
 \ifxetex
@@ -174,22 +185,22 @@ $endif$
 $if(title)$
 \title{$title$$if(subtitle)$\\\vspace{0.5em}{\large $subtitle$}$endif$}
 $endif$
+\newtoks\StudentNumber       %学号
+\newtoks\dengdi            %等第
+\newtoks\Cmajor          %学科专业中文名
+\newtoks\Ccourse     %课程名称
+\newtoks\Cschoolname      %学院中文名
 $if(author)$
 % \author{$for(author)$$author$$sep$ \and $endfor$}
-\author{
 $for(author)$
-$if(author.name)$
-姓名：$author.name$ \\
-学号：$author.number$ \\
-$if(author.affiliation)$
-$author.affiliation$
-$endif$
-$else$
-$author$
-$endif$
+\author{$author.name$}
+\StudentNumber{$author.number$}
+\Cmajor{$author.affiliation$}
+\Cschoolname{$author.schoolname$}
 $endfor$
-}
 $endif$
+\dengdi{ }
+\Ccourse{$course$}
 \date{$date$}
 $for(header-includes)$
 $header-includes$
@@ -205,13 +216,58 @@ $endfor$
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
+%%========================================封面================================================================
+\makeatletter
+\def\maketitle{%
+  \null
+  \thispagestyle{plain}%
+  %\vspace*{-2cm}
+  \begin{center}\leavevmode
+    {\sffamily \zihao{5}%
+    \begin{tabular}{p{9cm}lp{3cm}l}
+  & \raisebox{-0.5ex}[0pt]{\makebox[1.5cm][s]{学\hfill 号}} & {}\hfill\raisebox{-0.5ex}[0pt]{\the\StudentNumber}\hfill{} & \\ \cline{3-3}
+  & \raisebox{-0.5ex}[0pt]{\makebox[1.5cm][s]{等\hfill 第}} & {}\hfill\raisebox{-0.5ex}[0pt]{\the\dengdi}\hfill{}   & \\ \cline{3-3}
+    \end{tabular}
+    }
+    \par
+    \vspace*{2.1cm} %插入空白
+    {\zihao{1} \makebox[9cm][s]{苏州大学实验报告}}\\
+    \vspace{3.6cm}
+    {\sffamily \zihao{2} \@title \par}%
+%    \vspace{4cm}
+     \vfill\vfill\vfill
+    {\zihao{-3}
+    \begin{tabular}{cp{5cm}c}
+      \raisebox{-3ex}[0pt]{\makebox[3.5cm][s]{院\hfill (系)\hfill 名\hfill 称：}} & {  {}\raisebox{-3ex}[0pt]{\the\Cschoolname}\hfill{}} & \\[3ex]
+      \raisebox{-3ex}[0pt]{\makebox[3.5cm][s]{专\hfill 业\hfill 名\hfill 称：}} & { {}\raisebox{-3ex}[0pt]{\the\Cmajor}\hfill{}} & \\[3ex]
+      \raisebox{-3ex}[0pt]{\makebox[3.5cm][s]{学\hfill 生\hfill 姓\hfill 名：}} & { {}\raisebox{-3ex}[0pt]{\@author}\hfill{}} & \\[3ex]
+      \raisebox{-3ex}[0pt]{\makebox[3.5cm][s]{课\hfill 程\hfill 名\hfill 称：}} & { {}\raisebox{-3ex}[0pt]{\the\Ccourse}\hfill{}} & \\[3ex]
+     \end{tabular}
+    }
+    \par
+    \vspace{2.6cm}
+    {
+    {\zihao{3} \@date \par}%
+    }
+    %\vspace*{-0.7cm}
+  \end{center}%
+%  \null
+%   \cleardoublepage
+  }
+
+\renewcommand{\verbatim@font}{\normalfont\ttfamily\fontspec{Consolas}[FakeStretch=0.9]}
+\makeatother
+
 \begin{document}
 $if(title)$
+\pdfbookmark[0]{封面}{title}         % 封面页加到 pdf 书签
 \maketitle
 $endif$
 $if(abstract)$
 \begin{abstract}
+\thispagestyle{plain}
 $abstract$
+\stepcounter{page}
 \end{abstract}
 $endif$
 
@@ -223,6 +279,8 @@ $if(toc)$
 {
 \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
 \setcounter{tocdepth}{$toc-depth$}
+\pdfbookmark[0]{目录}{toc}
+\addtocounter{page}{2}
 \tableofcontents
 }
 $endif$
