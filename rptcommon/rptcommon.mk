@@ -6,10 +6,11 @@ TARGET_FILE = report.pdf
 SRC_FILES := header.md work??.md
 TEMPLATE_TEX = $(RPTCOMMON_DIR)/template.tex
 DOCUMENTCLASS = report
+TYPE = labs
 GEOMETRY = "scale={.75,.8},top=3cm"
 PANDOC = pandoc
 PANDOC_ARGS = --template=$(TEMPLATE_TEX) --latex-engine=xelatex --toc \
-	      -V fontsize=12pt -V papersize=a4paper \
+	      -V fontsize=12pt -V papersize=a4paper -V $(TYPE) \
 	      -V documentclass=$(DOCUMENTCLASS) \
 	      --toc-depth=3 -V geometry=$(GEOMETRY) -N
 

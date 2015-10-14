@@ -39,15 +39,39 @@ $endif$
         },
         abstractname = {\pdfbookmark[0]{摘要}{abstract}摘要}
     }
+    $if(posts)$
+        \xeCJKDeclareSubCJKBlock{Emoji}{ "2702 -> "27B0 }
+        \ctexset {
+            chapter = {
+                number = ,
+                name = {✨},
+            },
+        }
+        \renewcommand{\thesection}{\arabic{section}}
+        \makeatletter
+        \renewcommand*\l@section{\@dottedtocline{1}{1.5em}{1.5em}}
+        \renewcommand*\l@subsection{\@dottedtocline{2}{3.0em}{2.4em}}
+        \renewcommand*\l@subsubsection{\@dottedtocline{3}{6.2em}{3.3em}}
+        \makeatother
+    $endif$
+    $if(project)$
+        \ctexset {
+            chapter = {
+                name = {第,章},
+            },
+        }
+    $endif$
     \setmainfont{Minion Pro}
     % \setmathfont(Greek){Minion Pro}
     \setsansfont{Myriad Pro}
     \setmonofont{Consolas}
     \setCJKmainfont[BoldFont={SimHei},
                   ItalicFont={FZKaiTi},
+                  Emoji={Segoe UI Emoji},
                   SlantedFont={FZFangSongTi}]{FZShuSong-Z01}
     \setCJKsansfont[BoldFont={FZDaHei-B02S},
                   ItalicFont={FZLiShu II-S06S},
+                  Emoji={Segoe UI Emoji},
                   SlantedFont={FZCuYuan-M03S}]{SimHei}
     \setCJKmonofont[BoldFont={FZZhongDengXian-Z07S},
                   ItalicFont={FZXiYuan-M01S},
