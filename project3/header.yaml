@@ -1,0 +1,83 @@
+---
+title: 采用嵌入式 Linux 的高清视频采集与处理系统
+author:
+- name: 黄兴
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+  schoolname: 电子信息学院
+course: Linux 操作系统
+date: 2015-2016 学年第一学期
+partner:
+- name: 合作甲
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作乙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作丙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+keywords: 高清视频采集；图像处理；嵌入式；Linux；CMOS；QT
+enkeywords: HD Video Acquisition; Image Processing; Embedded; Linux; CMOS; QT
+abstract: |
+  视频技术在安防监控、医疗卫生、视频通信等领域应用越来越广泛，而高清视频应用是
+  现在以及未来发展重点。基于此背景，本设计实现了一款具有智能图像处理功能的嵌入
+  式高清视频采集与处理系统。
+  
+  本文首先分析了具有智能图像处理功能的嵌入式高清视频采集与处理系统总体设
+  计方案。围绕这个方案详细介绍了具体实现过程，主要包括以下内容：
+  
+  1.  系统硬件设计。主要包括视频采集、处理器、电源、USB、串口、ISP、MMC、HDMI等
+      模块电路原理图设计。
+  
+  2.  嵌入式Linux软件开发平台搭建。包括系统内核裁剪与移植、交叉编译环境搭建、
+      BootLoader编译移植以及文件系统制作等。
+  
+  3.  系统软件的设计。包括视频驱动设计及配置，采集程序设计以及图像增强、边缘检
+      测、人脸跟踪等视频处理算法实现。
+  
+  4.  QT界面设计及OSD功能实现。
+  
+  总的来说，本文针对的高清视频采集与处理系统，能够达到720p/30f的要求，理论
+  上可以达到720p/60f。支持视频图像的边缘检测、图像增强、人脸跟踪、底片视频
+  等处理功能以及具有人机交互界面。
+enabstract: |
+  In the field of security monitoring, health care and video
+  communications, video technology is more and more widely, HD video
+  applications now and in the future development priorities. Measure the
+  clarity of the indicators is the image resolution, the greater the
+  resolution the sharp the image, but most video applications on the
+  market do not have HD video capture and processing capacity of its one
+  of the main reasons is the embedded processors the ability to reach a HD
+  video data. Hardware technology hinders the development of the embedded
+  HD video processing system. Based on this background, we propose an
+  intelligent image processing functions HD video acquisition and
+  processing system.
+  
+  To analyze and compare existing pros and cons of the video capture
+  system, under proposed paragraph intelligent image processing functions
+  embedded HD video acquisition and processing system for the overall
+  design scheme. Around the program details of a specific implementation
+  method, mainly include the following:
+  
+  1.  System hardware design. Include video capture, the processor, power
+      supply, USB, serial port, the ISP, MMC, the HDMI module circuit
+      schematic design.
+  
+  2.  Embedded Linux software platform. Include cropped transplantation of
+      the system kernel, cross-compilation environment to build, u-boot
+      compile transplantation.
+  
+  3.  System software design. Include video-driven design and
+      configuration, acquisition program design and image increase, edge
+      detection, face tracking and video processing algorithm.
+  
+  4.  The QT interface design and realization of the OSD functions.
+  
+  Overall, this article for HD video acquisition and processing system,
+  to achieve requirements of 720p/30f, could theoretically reach
+  720p/60f. Support video image enhancement, face tacking, negatives and
+  video processing capabilities and interactive interface. The system is
+  a good prospect of application in the field of medic image processing
+  and security monitoring.
+...
