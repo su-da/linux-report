@@ -1,0 +1,52 @@
+---
+title: Linux 下计步器软件设计
+author:
+- name: 某某某
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+  schoolname: 电子信息学院
+course: Linux 操作系统
+date: 2015-2016 学年第一学期
+partner:
+- name: 合作甲
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作乙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作丙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+keywords: Google Android；计步器；智能手机；计步原理
+enkeywords: Google Android; Pedometer; Smart phones; meter-step
+abstract: |
+  随着人们生活水平的不断提高，人们的健康意识得到了空前广泛的提高，越来越多
+  的人以锻炼的方式来缓解自己在工作、学习和生活中的种种压力。在现代人们的生
+  活节奏普遍提高的情况下锻炼的效果成为人们关心的话题，为了能使锻炼的效果达
+  到人们预计的目标，计步器的使用成为人们的最佳选择。
+  
+  本报告主要介绍在 Google Android 平台智能手机中计步器软件的开发及测试。
+  从软件的概要设计到详细设计一一作了说明，并且着重介绍了软件界面
+  的实现与计步原理。通过分析传感器数据得出计步算法，并对此算法提出了优化；
+  同时，文章还介绍了计步器软件中其他涉及到的数据并作相应的处理。最后文章还
+  从实践的角度出发，验证计步器软件在真机中的运行情况。
+
+enabstract: |
+  With the continuous improvement of living standard, people's awareness
+  of health have improved a lot, more and more people want to find a
+  better way to ease their work, study and life pressures. Pace of life in
+  the modern society, a general increase in the case of the effect of
+  exercise become a topic of concern. In order to enable an effect way of
+  exercise to achieve the objectives which was expected, pedometer becomes
+  the best choice.
+  
+  This report describes the Google Android platform in the pedometers
+  smartphone software development and testing. Summary from software
+  design to detailed design, explained one by one, and focuses on the
+  realization of the software interface of step with the principles of
+  dollars. Sensor data obtained by analyzing the total-step method, and
+  optimization of this algorithm is presented; the same time, the article
+  also introduces the pedometer software and other data relating to the
+  treatment accordingly. Finally, the paper also from a practical point of
+  view, verify pedometer software in real machine in operation.
+...
