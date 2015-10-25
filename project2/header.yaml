@@ -1,0 +1,46 @@
+---
+title: Modbus 仪表通信
+author:
+- name: 某某某
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+  schoolname: 电子信息学院
+course: Linux 操作系统
+date: 2015-2016 学年第一学期
+partner:
+- name: 合作甲
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作乙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作丙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+keywords: ZW1402 仪表；虚拟仪器；LabWindows/CVI
+enkeywords: ZW1402; virtual instrument; LabWindows/CVI
+abstract: |
+  本设计利用虚拟仪器的软件开发工具 LabWindows/CVI 通过对串口读或写等操
+  作与 ZW1402 仪表进行通信，设计一个可以自动化测量及数据处理的仪表通信
+  系统。
+
+  本设计主要包括系统的用户界面设计及功能的实现过程。利用
+  LabWindows/CVI 创建图形用户界面，再通过 C 语言实现对各控件相应功能的
+  处理。实现了仪表通信系统的控制，即在设计好的用户界面上点击相应的控件
+  完成对仪表的各种操作。最后给出设计好的面板进行通信的测试结果。
+enabstract: |
+  Software development tool of virtual instrument, LabWindows/CVI, in
+  this report is used to design a communication system, which can
+  measure and do data processing automatically, by writing or reading
+  serial interface.
+  
+  This report mainly describes the process of the design of User
+  Interface and the process of implementing all the functions.
+  LabWindows/CVI is used to establish the User Interface and C is used
+  to implement the appropriate functions that handle corresponding
+  operations on the controls. And the control of the communication
+  system has been implemented. In other words, pressing the
+  corresponding controls in the User Interface which is designed to
+  control the instrument. Finally, it will show the test result of
+  communication after running the designed panel.
+...
