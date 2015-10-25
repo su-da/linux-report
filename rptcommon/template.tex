@@ -1,6 +1,6 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 $if(fontfamily)$
-\usepackage{$fontfamily$}
+\usepackage[$fontfamilyoptions$]{$fontfamily$}
 $else$
 \usepackage{lmodern}
 $endif$
@@ -9,13 +9,13 @@ $if(linestretch)$
 \setstretch{$linestretch$}
 $endif$
 \usepackage{amssymb,amsmath}
-\usepackage[thinspace,thinqspace,squaren]{SIunits}
+\usepackage[range-phrase = --, binary-units]{siunitx}
 \usepackage{MnSymbol}
 \usepackage[fullfamily,opticals,swash,minionint,openg,lf]{MinionPro}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
+  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
 $if(euro)$
   \usepackage{eurosym}
@@ -37,7 +37,9 @@ $endif$
         subsection = {
             format = \sffamily,
         },
-        abstractname = {\pdfbookmark[0]{摘要}{abstract}摘要}
+        subsubsection = {
+            format = \sffamily,
+        },
     }
     $if(posts)$
         \xeCJKDeclareSubCJKBlock{Emoji}{ "2702 -> "27B0 }
@@ -53,6 +55,8 @@ $endif$
         \renewcommand*\l@subsection{\@dottedtocline{2}{3.0em}{2.4em}}
         \renewcommand*\l@subsubsection{\@dottedtocline{3}{6.2em}{3.3em}}
         \makeatother
+        \renewcommand{\thefigure}{\arabic{figure}}
+        \renewcommand{\thetable}{\arabic{table}}
     $endif$
     $if(project)$
         \ctexset {
@@ -67,31 +71,35 @@ $endif$
     \setmonofont{Consolas}
     \setCJKmainfont[BoldFont={SimHei},
                   ItalicFont={FZKaiTi},
+                $if(posts)$
                   Emoji={Segoe UI Emoji},
-                  SlantedFont={FZFangSongTi}]{FZShuSong-Z01}
+                $endif$
+                  SlantedFont={FZFangSongTi}]{FZNewShuSong-Z10}
     \setCJKsansfont[BoldFont={FZDaHei-B02S},
                   ItalicFont={FZLiShu II-S06S},
+                $if(posts)$
                   Emoji={Segoe UI Emoji},
+                $endif$
                   SlantedFont={FZCuYuan-M03S}]{SimHei}
     \setCJKmonofont[BoldFont={FZZhongDengXian-Z07S},
-                  ItalicFont={FZXiYuan-M01S},
-                  SlantedFont={FZBaoSong-Z04S}]{FZXiDengXian-Z06S}
+                  ItalicFont={FZXiYuan-M01},
+                  SlantedFont={FZBaoSong-Z04S}]{FZXiDengXian-Z06}
   \else
     \usepackage{fontspec}
   \fi
   \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
   \newcommand{\euro}{€}
 $if(mainfont)$
-    \setmainfont{$mainfont$}
+    \setmainfont[$mainfontoptions$]{$mainfont$}
 $endif$
 $if(sansfont)$
-    \setsansfont{$sansfont$}
+    \setsansfont[$sansfontoptions$]{$sansfont$}
 $endif$
 $if(monofont)$
-    \setmonofont[Mapping=tex-ansi]{$monofont$}
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$monofontoptions$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
-    \setmathfont(Digits,Latin,Greek){$mathfont$}
+    \setmathfont(Digits,Latin,Greek)[$mathfontoptions$]{$mathfont$}
 $endif$
 $if(CJKmainfont)$
     \usepackage{xeCJK}
@@ -108,6 +116,8 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
+\makeatletter
+\@ifpackageloaded{hyperref}{}{%
 \ifxetex
   \usepackage[setpagesize=false, % page size defined by xetex
               unicode=false, % unicode breaks when used with xetex
@@ -115,7 +125,13 @@ $endif$
 \else
   \usepackage[unicode=true]{hyperref}
 \fi
-\usepackage[usenames,dvipsnames]{color}
+}
+\@ifpackageloaded{color}{
+    \PassOptionsToPackage{usenames,dvipsnames}{color}
+}{%
+    \usepackage[usenames,dvipsnames]{color}
+}
+\makeatother
 $if(print)$
 \hypersetup{breaklinks=true,
             bookmarks=true,
@@ -134,20 +150,24 @@ $else$
             citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
             urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
             linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
-            pdfborder={0 0 0}}
+            pdfborder={0 0 0}
+            $if(hidelinks)$,hidelinks,$endif$}
 $endif$
 \urlstyle{same}  % don't use monospace font for urls
 $if(lang)$
 \ifxetex
   \usepackage{polyglossia}
-  \setmainlanguage{$mainlang$}
-  \setotherlanguages{$for(otherlang)$$otherlang$$sep$,$endfor$}
+  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+$for(polyglossia-otherlangs)$
+  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+$endfor$
 \else
-  \usepackage[shorthands=off,$lang$]{babel}
+  \usepackage[shorthands=off,$babel-lang$]{babel}
 \fi
 $endif$
 $if(natbib)$
-\usepackage{natbib}
+\usepackage[square, comma, numbers, compress]{natbib}
+\usepackage[nottoc]{tocbibind}
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
 $endif$
 $if(biblatex)$
@@ -164,10 +184,11 @@ $if(lhs)$
 $endif$
 $if(highlighting-macros)$
 $highlighting-macros$
+\RecustomVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},fontsize=\footnotesize}
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
-\VerbatimFootnotes
+\VerbatimFootnotes % allows verbatim text in footnotes
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
@@ -192,18 +213,37 @@ $if(strikeout)$
 % avoid problems with \sout in headers with hyperref:
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
 $endif$
-% \setlength{\parindent}{0pt}
-% \setlength{\parskip}{6pt plus 2pt minus 1pt}
+$if(indent)$
+$else$
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+$endif$
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{enumitem}
+\setlist{nosep}
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
 \setcounter{secnumdepth}{0}
 $endif$
-$if(verbatim-in-note)$
-\VerbatimFootnotes % allows verbatim text in footnotes
+$if(dir)$
+\ifxetex
+  % load bidi as late as possible as it modifies e.g. graphicx
+  $if(latex-dir-rtl)$
+  \usepackage[RTLdocument]{bidi}
+  $else$
+  \usepackage{bidi}
+  $endif$
+\fi
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \TeXXeTstate=1
+  \newcommand{\RL}[1]{\beginR #1\endR}
+  \newcommand{\LR}[1]{\beginL #1\endL}
+  \newenvironment{RTL}{\beginR}{\endR}
+  \newenvironment{LTR}{\beginL}{\endL}
+\fi
 $endif$
 
 $if(title)$
@@ -230,6 +270,8 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
+$if(subparagraph)$
+$else$
 % Redefines (sub)paragraphs to behave more like sections
 \ifx\paragraph\undefined\else
 \let\oldparagraph\paragraph
@@ -239,6 +281,7 @@ $endfor$
 \let\oldsubparagraph\subparagraph
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
+$endif$
 
 %%========================================封面================================================================
 \makeatletter
@@ -288,11 +331,54 @@ $if(title)$
 \maketitle
 $endif$
 $if(abstract)$
-\begin{abstract}
-\thispagestyle{plain}
+\newcommand\cnabstractname{摘要}
+\newenvironment{cnabstract}{
+    \chapter*{\cnabstractname}
+    \vspace*{-24pt}
+    \pdfbookmark[0]{\cnabstractname}{abstract}
+    }
+    {\par}
+
+\begin{cnabstract}
 $abstract$
-\stepcounter{page}
-\end{abstract}
+\end{cnabstract}
+$if(project)$
+    \newcommand\cnkeywords[1]{ {\noindent\bfseries\cnkeywordsname：}#1}
+    \newcommand\cnkeywordsname{关键词}
+
+    \par
+    \vspace*{2em}
+    \cnkeywords{$keywords$}
+    $if(partner)$
+    \vspace*{2em}
+    \par
+    {\noindent\bfseries 合作者：}
+    \begin{tabular}[t]{ l l l }
+    $for(partner)$
+    $partner.name$ & $partner.number$ & $partner.affiliation$ \\
+    $endfor$
+    \end{tabular}
+    $endif$
+    $if(enabstract)$
+        \newcommand\enabstractname{Abstract}
+        \newcommand\enkeywords[1]{ {\noindent\bfseries\enkeywordsname: }#1}
+        \newcommand\enkeywordsname{Key words}
+
+        \newenvironment{enabstract}{
+            \chapter*{\enabstractname}
+            \vspace*{-24pt}
+            \pdfbookmark[0]{\enabstractname}{enabstract}
+            }
+            {\par}
+        \begin{enabstract}
+        $enabstract$
+        \end{enabstract}
+        \par
+        \vspace*{2em}
+
+        \enkeywords{$enkeywords$}
+    $endif$
+$endif$
 $endif$
 
 $for(include-before)$
@@ -303,8 +389,8 @@ $if(toc)$
 {
 \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
 \setcounter{tocdepth}{$toc-depth$}
+\newpage
 \pdfbookmark[0]{目录}{toc}
-\addtocounter{page}{2}
 \tableofcontents
 }
 $endif$
@@ -333,8 +419,11 @@ $if(biblatex)$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 
 $endif$
+$if(include-after)$
+\appendix
 $for(include-after)$
 $include-after$
 
 $endfor$
+$endif$
 \end{document}
