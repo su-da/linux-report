@@ -24,6 +24,9 @@ PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables \
 ifdef PRINT
     PANDOC_ARGS += -V print --no-highlight
 endif
+ifdef DEBUG
+    PANDOC_ARGS += --verbose
+endif
 ifeq ($(TYPE),project)
     APPENDICES := $(wildcard appendix??.md)
     APPENDICESTEX := $(addprefix $(BUILD_DIR)/, $(APPENDICES:.md=.tex))
