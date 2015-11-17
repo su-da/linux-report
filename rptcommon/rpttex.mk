@@ -23,4 +23,4 @@ $(TARGET_FILE) : $(SRC_FILES) $(MAKE_RULES) $(BIB_FILE)
 
 clean :
 	$(LATEXMK) -C
-	$(RM) *bbl *fls
+	-$(RM) *bbl *fls

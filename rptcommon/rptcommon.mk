@@ -14,7 +14,7 @@ DOCUMENTCLASS = report
 TYPE ?= labs
 GEOMETRY = "scale={.75,.8},top=3cm"
 PANDOC = pandoc
-PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables \
+PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables -p \
 	      -V fontsize=12pt -V papersize=a4paper -V $(TYPE) \
 	      -V documentclass=$(DOCUMENTCLASS) -V biblio-style=gbt7714-2005 \
 	      --toc-depth=3 -V geometry=$(GEOMETRY) -N \
@@ -59,8 +59,8 @@ else
 endif
 
 clean :
-	$(RM) $(TARGET_FILE)
+	-$(RM) $(TARGET_FILE)
 ifeq ($(TYPE),project)
 	$(MAKE) -C $(BUILD_DIR) clean
-	$(RM) $(BUILD_DIR)/*tex $(BUILD_DIR)/*bib
+	-$(RM) $(BUILD_DIR)/*tex $(BUILD_DIR)/*bib
 endif
