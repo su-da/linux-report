@@ -22,7 +22,9 @@ PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables -p \
 	      -M figureTitle=图 -M tableTitle=表 -M lofTitle=插图 \
 	      -M lotTitle=表格 -M eqnPrefix=""
 ifdef PRINT
-    PANDOC_ARGS += -V print --no-highlight
+    PANDOC_ARGS += --no-highlight
+else
+    PANDOC_ARGS += -V colorlinks
 endif
 ifdef DEBUG
     PANDOC_ARGS += --verbose

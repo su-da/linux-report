@@ -1,6 +1,6 @@
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
 $if(fontfamily)$
-\usepackage[$fontfamilyoptions$]{$fontfamily$}
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
 \usepackage{lmodern}
 $endif$
@@ -93,23 +93,23 @@ $endif$
   \else
     \usepackage{fontspec}
   \fi
-  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
   \newcommand{\euro}{€}
 $if(mainfont)$
-    \setmainfont[$mainfontoptions$]{$mainfont$}
+    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
 $endif$
 $if(sansfont)$
-    \setsansfont[$sansfontoptions$]{$sansfont$}
+    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
 $endif$
 $if(monofont)$
-    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$monofontoptions$$endif$]{$monofont$}
+    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
 $endif$
 $if(mathfont)$
-    \setmathfont(Digits,Latin,Greek)[$mathfontoptions$]{$mathfont$}
+    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
 $endif$
 $if(CJKmainfont)$
     \usepackage{xeCJK}
-    \setCJKmainfont[$CJKoptions$]{$CJKmainfont$}
+    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
 $endif$
 \fi
 % use upquote if available, for straight quotes in verbatim environments
@@ -122,53 +122,44 @@ $endif$
 $if(geometry)$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
 $endif$
-\makeatletter
-\@ifpackageloaded{hyperref}{}{%
-\ifxetex
-  \usepackage[setpagesize=false, % page size defined by xetex
-              unicode=false, % unicode breaks when used with xetex
-              xetex]{hyperref}
-\else
-  \usepackage[unicode=true]{hyperref}
-\fi
-}
-\@ifpackageloaded{color}{
-    \PassOptionsToPackage{usenames,dvipsnames}{color}
-}{%
-    \usepackage[usenames,dvipsnames]{color}
-}
-\makeatother
-$if(print)$
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={$author-meta$},
+\usepackage{hyperref}
+\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\hypersetup{unicode=true,
+$if(title-meta)$
             pdftitle={$title-meta$},
-            pdfstartview={FitH},
-            allcolors=black,
-            pdfborder={0 0 0}}
-$else$
-\hypersetup{breaklinks=true,
-            bookmarks=true,
-            pdfauthor={$author-meta$},
-            pdftitle={$title-meta$},
-            pdfstartview={FitH},
-            colorlinks=true,
-            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
-            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
-            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
-            pdfborder={0 0 0}
-            $if(hidelinks)$,hidelinks,$endif$}
 $endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(subtitle)$
+            pdfsubject={$subtitle$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+$if(colorlinks)$
+            colorlinks=true,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
+            citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+$else$
+            pdfborder={0 0 0},
+$endif$
+            pdfstartview={FitH},
+            breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 $if(lang)$
-\ifxetex
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+$if(babel-newcommands)$
+  $babel-newcommands$
+$endif$
+\else
   \usepackage{polyglossia}
   \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
 $for(polyglossia-otherlangs)$
   \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
 $endfor$
-\else
-  \usepackage[shorthands=off,$babel-lang$]{babel}
 \fi
 $endif$
 $if(natbib)$
@@ -393,7 +384,9 @@ $include-before$
 $endfor$
 $if(toc)$
 {
+$if(colorlinks)$
 \hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$black$endif$}
+$endif$
 \setcounter{tocdepth}{$toc-depth$}
 \newpage
 \pdfbookmark[0]{目录}{toc}
