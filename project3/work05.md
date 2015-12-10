@@ -440,9 +440,7 @@ process back end）视频后端硬件处理，将输出的视频数据格式转�
 述 [@wangzy2006]。图像 $f(x, y)$ 中的某一灰度 $f_i$ 的像素数目 $t_i$ 所
 占总像素数目 $T$ 的份额为 $t_i/T$，称为该灰度像素在该图像中出现的概率密
 度 $p_f(f_i)$。
-
 $$p_f(f_i) = t_i / T \quad i = 0,\,1,\,2,\,...\, N-1 $$ {#eq:ch5prodens}
-
 其中 $N$ 为灰度级总数目，一般灰度图像灰度级为 0-255，这种纯灰度变化的函
 数称为该图像的概率密度函数，该函数是梳妆直线，也被称为直方图。一帧灰度视
 频图像中，其直方图概括了图像中各灰度级的含量，图像的明暗分配状态就可以直
@@ -461,21 +459,14 @@ density function)，均衡化就是令概率密度为1。
 
 设转换前图像的概率密度函数为 $p_r(r)$，转换后图像的概率密度函数为
 $P_s(s)$，转换的函数为 $s=f(r)$，由概率论知识得到公式 [@eq:ch5eqps]：
-
 $$P_s(s) = p_r(r) \cdot \frac{\mathrm{d}r}{\mathrm{d}s}$$ {#eq:ch5eqps}
-
 这样，如果使转化后的图像概率密度为1，则必须满足公式 [@eq:ch5eqpr]：
-
 $$p_r(r) = \frac{\mathrm{d}s}{\mathrm{d}r}$$ {#eq:ch5eqpr}
-
 对等式两边积分可得到：
-
 $$s = f(r) = \int_0^r p_r(u) \mathrm{d}u$$ {#eq:ch5eqsfr}
-
 公式中的 $f(r)$ 代表 $r$ 的灰度积分变换函数，$u$ 为变量。公式
 [@eq:ch5eqsfr] 也被称为累积分布函数，由 [@eq:ch5prodens] 概率密度函数可
 得到直方图均衡化公式 [@eq:ch5barbal]：
-
 $$s = f(r_k) = \sum_{j=0}^k \frac{t_j}{T}
     = \sum_{j=0}^k P_r(r_k)$$ {#eq:ch5barbal}
 
