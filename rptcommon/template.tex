@@ -11,7 +11,6 @@ $endif$
 \usepackage{amssymb,amsmath}
 \usepackage[range-phrase = \text{\~{}}, range-units = single,
             binary-units]{siunitx}
-\usepackage{MnSymbol}
 \usepackage[fullfamily,opticals,swash,minionint,openg,lf]{MinionPro}
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
@@ -24,7 +23,7 @@ $endif$
 \else % if luatex or xelatex
   \ifxetex
     \usepackage{mathspec}
-    \usepackage{xltxtra,xunicode}
+    % \usepackage{unicode-math}
     \usepackage[UTF8, heading = true, fontset = adobe]{ctex}
     \ctexset {
         chapter = {
@@ -46,7 +45,6 @@ $endif$
         \xeCJKDeclareSubCJKBlock{Emoji}{ "2702 -> "27B0 }
         \ctexset {
             chapter = {
-                number = ,
                 name = {✨},
             },
         }
@@ -67,7 +65,6 @@ $endif$
         }
     $endif$
     \setmainfont{Minion Pro}
-    % \setmathfont(Greek){Minion Pro}
     \setsansfont{Myriad Pro}
     \setmonofont{Consolas}
     \sisetup{
@@ -76,6 +73,16 @@ $endif$
         math-ohm = \text{Ω},
         text-ohm = Ω,
     }
+    % \setmathfont{XITS Math}
+    % \setmathfont[range=\mathup/{num,latin,Latin,greek,Greek}]{Minion Pro}
+    % \setmathfont[range=\mathbfup/{num,latin,Latin,greek,Greek}]{MinionPro-Bold}
+    % % \setmathfont[range=\mathit/{num,latin,Latin,greek,Greek}]{MinionPro-It}
+    % \setmathfont[range=\mathbfit/{num,latin,Latin,greek,Greek}]{MinionPro-BoldIt}
+    % \setmathfont[range=\mathscr,StylisticSet={1}]{XITS Math}
+    % \setmathfont[range={"005B,"005D,"0028,"0029,"007B,"007D,"2211,"002F,"2215 } ]{Latin Modern Math} % brackets, sum, /
+    % % \setmathfont[range={"002B,"002D,"003A-"003E} ]{MnSymbol} % + - < = >
+    % \setmathfont[range={"1D454}]{Latin Modern Math} % openg
+    % % \setmathrm{Minion Pro}
     \setCJKmainfont[BoldFont={SimHei},
                   ItalicFont={FZKaiTi},
                 $if(posts)$
@@ -220,7 +227,8 @@ $endif$
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \usepackage{enumitem}
-\setlist{nosep}
+\setlist{itemsep=0.5\itemsep, parsep=0.5\parsep,
+         partopsep=0.5\partopsep, topsep=0.5\topsep}
 $if(numbersections)$
 \setcounter{secnumdepth}{5}
 $else$
