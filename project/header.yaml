@@ -1,0 +1,39 @@
+---
+title: 智能环境监测项目实训
+author:
+- name: 某某某
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+  schoolname: 电子信息学院
+course: Linux 操作系统
+date: 2015-2016 学年第一学期
+partner:
+- name: 合作甲
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作乙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+- name: 合作丙
+  number: 14284060xx
+  affiliation: 14 通信工程 (嵌入式培养)
+keywords: Xilinx SDK；Zedboard；Appweb；MJPG-Streamer
+enkeywords: Xilinx SDK; Zedboard; Appweb; MJPG-Streamer
+abstract: |
+  本文档是项目实训报告的模板。但因为实施过程更接近于模仿 (emulation)，所
+  以很难形成正式的项目报告，因此并不按照正式的章节划分。而是按照实训的时
+  间顺序，用各阶段 (phase) 做一级标题，二级标题 (如 1.1, 1.2 等) 则限定
+  为本阶段安排的各种活动 (activity)，在写作自己的报告时应秉承此原则。如
+  果各活动关系比较松散，可以每一个活动做为一个一级标题(相当于一章)，可根
+  据实际情况考虑是否采用后一种组织方案。
+
+  **Activity.** A distinct, scheduled portion of work performed during
+  the course of a project.  **活动**：在进度计划中所列，并在项目过程中实施
+  的工作组成部分。 **Project Phase.** A collection of logically related
+  project activities that culminates in the completion of one or more
+  deliverables.  **项目阶段**：一组具有逻辑关系的项目活动的集合，通常以一
+  个或多个可交付成果的完成为结束。
+
+  这里的所有模板仅作为排版参考，内容上应以自己所做实验为依据。中文的模板
+  在后面。
+...
