@@ -15,14 +15,14 @@ TYPE ?= labs
 GEOMETRY = "scale={.75,.8},top=3cm"
 PANDOC = pandoc
 PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables -p \
-	      -V fontsize=12pt -V papersize=a4paper -V $(TYPE) \
+	      -V fontsize=12pt -V papersize=a4 -V $(TYPE) \
 	      -V documentclass=$(DOCUMENTCLASS) -V biblio-style=gbt7714-2005 \
 	      --toc-depth=3 -V geometry=$(GEOMETRY) -N \
 	      --filter pandoc-crossref -M figPrefix="" -M tblPrefix="" \
 	      -M figureTitle=图 -M tableTitle=表 -M lofTitle=插图 \
-	      -M lotTitle=表格 -M eqnPrefix=""
+	      -M lotTitle=表格 -M eqnPrefix="" -M secPrefix=""
 ifdef PRINT
-    PANDOC_ARGS += --no-highlight
+    PANDOC_ARGS += --no-highlight --listings
 else
     PANDOC_ARGS += -V colorlinks
 endif
@@ -32,7 +32,7 @@ endif
 ifeq ($(TYPE),project)
     APPENDICES := $(wildcard appendix??.md)
     APPENDICESTEX := $(addprefix $(BUILD_DIR)/, $(APPENDICES:.md=.tex))
-    BIB_FILE = references.bib
+    BIB_FILE := $(wildcard references.bib)
     PANDOC_ARGS += --natbib --bibliography=$(BIB_FILE) -t latex
     PANDOC_EXARGS = --template=$(TEMPLATE_TEX)
     PANDOC_EXARGS += $(addprefix -A , $(APPENDICESTEX))
@@ -52,7 +52,9 @@ $(TARGET_FILE) : $(SRC_FILES) $(TEMPLATE_TEX) $(MAKE_RULES) \
 	@echo making report, please wait...
 ifeq ($(TYPE),project)
 	$(PANDOC) $(PANDOC_ARGS) $(SRC_FILES) $(PANDOC_EXARGS) -o $(TARGET_TEX)
+ifneq ($(strip $(BIB_FILE)),)
 	$(RSYNC) -a --delete $(BIB_FILE) $(BUILD_DIR)
+endif
 	$(MAKE) -C $(BUILD_DIR)
 	# $(PS2PDF) $(PS2PDF_ARGS) $(BUILD_DIR)/$(TARGET_FILE) $(TARGET_FILE)
 	$(RSYNC) -a --delete $(BUILD_DIR)/$(TARGET_FILE) $(TARGET_FILE)
