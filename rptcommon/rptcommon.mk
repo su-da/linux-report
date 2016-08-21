@@ -12,10 +12,10 @@ SRC_FILES := header.yaml work??.md
 TEMPLATE_TEX = $(RPTCOMMON_DIR)/template.tex
 DOCUMENTCLASS = report
 TYPE ?= labs
-GEOMETRY = "scale={.75,.8},top=3cm"
+GEOMETRY = "scale={.75586,.79265},top=30.6mm"
 PANDOC = pandoc
 PANDOC_ARGS = --latex-engine=xelatex --toc -V indent -V tables -p \
-	      -V fontsize=12pt -V papersize=a4 -V $(TYPE) \
+	      -V fontsize=11pt -V papersize=a4 -V $(TYPE) \
 	      -V documentclass=$(DOCUMENTCLASS) -V biblio-style=gbt7714-2005 \
 	      --toc-depth=3 -V geometry=$(GEOMETRY) -N \
 	      --filter pandoc-crossref -M figPrefix="" -M tblPrefix="" \
